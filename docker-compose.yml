@@ -3,16 +3,14 @@ services:
     frontend:
         container_name: frontend
         build:
-            context: ./php-lamp
+            context: .
             dockerfile: Dockerfile
         depends_on:
             - db
-        volumes:
-            - ./php-lamp/src:/var/www/html/
         networks:
             - mynet
         ports:
-            - 80:80
+            - "80:80"
     db:
         container_name: db
         image: mysql
