@@ -1,0 +1,31 @@
+version: '2.9.0'
+services:
+    frontend:
+        container_name: frontend
+        build:
+            context: ./php-lamp
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+        volumes:
+            - ./php-lamp/src:/var/www/html/
+        networks:
+            - mynet
+        ports:
+            - 80:80
+    db:
+        container_name: db
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: bookstore
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+        ports:
+            - "3306:3306"
+        networks:
+            - mynet
+
+networks:
+  - mynet
